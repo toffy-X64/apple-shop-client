@@ -1,0 +1,11 @@
+@use "@styles/_variables.scss" as *;
+
+.footer {
+    background-color: var(--color-bg);
+    padding: $space-md;
+    text-align: center;
+
+    p {
+        color: var(--color-text);
+    }
+}

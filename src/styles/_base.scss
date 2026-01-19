@@ -1,0 +1,48 @@
+@use "./_mixins.scss" as *;
+@use "./_variables.scss" as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    min-height: 100vh;
+    font-family: $font-main;
+    line-height: 1.5;
+}
+
+.app {
+    @include flex-col;
+    min-height: 100vh;
+}
+
+.container {
+    @include container;
+}
+
+:root {
+    --color-bg: #000;
+    --color-bg-secondary: #0f0f0f;
+
+    --color-text: #fff;
+    --color-text-muted: #6b7280;
+
+    --color-border: #e5e7eb;
+
+    --color-primary: #c42a2c;
+    --color-primary-hover: #1d4ed8;
+
+    --color-success: #16a34a;
+    --color-danger: #dc2626;
+}

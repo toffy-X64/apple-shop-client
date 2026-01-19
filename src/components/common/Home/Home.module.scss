@@ -1,0 +1,60 @@
+.recommendationList {
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.sortSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+
+  padding: 4px 24px 4px 0;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  option {
+    background-color: #111;
+    color: #fff;
+  }
+}
+
+
+.sortWrapper {
+    margin-bottom: 1em;
+}
+
+
+@media (max-width: 1024px) {
+  .recommendationList {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 572px) {
+  .recommendationList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+}

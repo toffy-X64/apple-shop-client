@@ -1,0 +1,143 @@
+@use "@styles/_variables.scss" as *;
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.empty {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--color-text);
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 12px;
+
+    padding: 12px 24px;
+    border-radius: 8px;
+
+    background: #000;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #333;
+    }
+  }
+}
+
+
+.success {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 48px 40px;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #fff;
+  font-size: 42px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111;
+}
+
+.success p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 32px;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.actions a {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.primary {
+  background: #111;
+  color: #fff;
+
+  &:hover {
+    background: #000;
+    transform: translateY(-1px);
+  }
+}
+
+.secondary {
+  background: #f3f4f6;
+  color: #111;
+
+  &:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+  }
+}
+
+.mainButton {
+    padding: $space-sm $space-lg;
+
+    color: var(--color-text);
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: $fs-lg;
+
+    background-color: var(--color-primary) !important;
+
+    border: none;
+    border-radius: $radius-sm;
+
+    cursor: pointer;
+}
+
+
+@media (max-width: 900px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,40 @@
+@use "@styles/_variables.scss" as *;
+
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+
+    justify-content: center;
+}
+
+.gif {
+    max-width: 25%;
+    align-self: center;
+}
+
+.mainButton {
+    padding: $space-sm $space-lg;
+
+    color: var(--color-text);
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: $fs-lg;
+
+    background-color: var(--color-primary);
+
+    border: none;
+    border-radius: $radius-sm;
+
+    cursor: pointer;
+}
