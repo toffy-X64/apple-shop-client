@@ -22,5 +22,13 @@ export const productService = {
             return await api.get(url, {signal: data.signal});
 
         return await api.get(url);
+    },
+    order: async(data) => {
+        return await api.post('/orders', {
+            email: data.email,
+            phone: data.phone,
+            fullname: data.fullname,
+            items: data.items
+        })
     }
 };

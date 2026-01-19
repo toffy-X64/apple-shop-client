@@ -104,6 +104,10 @@ const RecommendationList = () => {
             </div>
 
             <div className={styles.recommendationList}> 
+                {!loading && ( !products || products.length == 0 ) && (
+                    <h3>Ошибка сервера, попробуйте позже</h3>
+                )}
+
                 {products.map(item => (
                     <ProductCard key={item.id} product={item} />
                 ))}

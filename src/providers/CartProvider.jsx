@@ -13,7 +13,7 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = useCallback( (product) => {
         setCart(prev => {
-            const existing = prev.find(i => i.product.id == product.id);
+            const existing = prev.find(i => i.product?.id == product.id);
 
             if (existing) {
                 return prev.map(item => {
