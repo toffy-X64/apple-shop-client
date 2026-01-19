@@ -6,11 +6,27 @@ import Loader from '@components/layout/Loader';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+function useDebounce(callback, delay) {
+    const [debounceValue, setDebounceValue] = useState(callback);
+    useEffect(() => {
+        const timerId = setTimeout(() => {
+            setDebounceValue(callback);
+        }, delay)
+
+        return () => clearTimeout(timerId);
+    }, [callback, delay]);
+
+    return debounceValue;
+}
+
 const RecommendationList = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
+    const [search, setSearch] = useState('');
     const [sort, setSort] = useState('newest');
+
+    const debouncedSearch = useDebounce(search, 500).trim();
 
     const loaderRef = useRef(null);
     const loadingRef = useRef(false);
@@ -25,7 +41,8 @@ const RecommendationList = () => {
         try {
             const res = await productService.getAll({
                 page: pageRef.current, 
-                sort: sort
+                sort: sort,
+                search: debouncedSearch
             });
 
             setProducts(prev => {
@@ -73,7 +90,8 @@ const RecommendationList = () => {
                 const res = await productService.getAll({
                     page: 1,
                     sort: sort,
-                    signal: controller.signal
+                    signal: controller.signal,
+                    search: debouncedSearch
                 });
 
                 setProducts(res.data.items);
@@ -90,6 +108,34 @@ const RecommendationList = () => {
         return () => controller.abort();
     }, [sort]);
 
+    useEffect(() => {
+        const controller = new AbortController();
+
+        const loadSearch = async () => {
+            loadingRef.current = true;
+            setProducts([]);
+            setLoading(true);
+
+            try {
+                const res = await productService.getAll({
+                    search: debouncedSearch,
+                    signal: controller.signal
+                });
+
+                setProducts(res.data.items);
+                pageRef.current = 2;
+                setHasMore(res.data.meta.pages > 1);
+            } finally {
+                loadingRef.current = false;
+                setLoading(false);
+            }
+        };
+
+        loadSearch();
+
+        return () => controller.abort();
+    }, [debouncedSearch]);
+
     return (
         <>
             <div className={styles.sortWrapper}>
@@ -101,11 +147,20 @@ const RecommendationList = () => {
                         <option value="price_desc">От дорогих</option>
                     </select>
                 </h4>
+
+                <div className={styles.searchBox}>
+                    <input 
+                        type="text" 
+                        placeholder="Поиск по товарам..." 
+                        value={search} 
+                        onChange={e => setSearch(e.target.value)} 
+                    />
+                </div>
             </div>
 
             <div className={styles.recommendationList}> 
                 {!loading && ( !products || products.length == 0 ) && (
-                    <h3>Ошибка сервера, попробуйте позже</h3>
+                    <h3>Результатов не найдено:(</h3>
                 )}
 
                 {products.map(item => (

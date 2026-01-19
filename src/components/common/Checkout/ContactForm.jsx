@@ -1,35 +1,49 @@
+import React, { useState } from 'react';
 import styles from './Checkout.module.scss';
 import { useForm } from 'react-hook-form';
 
 import { productService } from '@api/services/products.service';
 import { useCart } from '@providers/CartProvider';
-
 import { BadgeRussianRuble } from 'lucide-react';
-import { useState } from 'react';
-
+import toast from 'react-hot-toast';
 
 
 const ContactForm = () => {
     const { register, handleSubmit } = useForm();
+    const [isLoading, setIsLoading] = useState(false);
     const items = useCart().cart;
-    const openPayTypeModal = useCart().openTypeModal;
 
     const onSubmit = async (data) => {
-        // const formatedItems = items.map( e => {
-        //     return {
-        //         id: e.product.id,
-        //         quantity: e.quantity
-        //     }
-        // } );
+        const formatedItems = items.map( e => {
+            return {
+                id: e.product.id,
+                quantity: e.quantity
+            }
+        } );
 
-        // const dataToSubmit = {
-        //     ...data,
-        //     items: formatedItems
-        // };
+        const dataToSubmit = {
+            ...data,
+            items: formatedItems
+        };
 
-        // await productService.order(dataToSubmit);
+        try {
+            setIsLoading(true);
+            const res = await productService.order(dataToSubmit);
 
-        openPayTypeModal(data);
+            if (res.status === 201) {
+                window.location.href = res.data.invoice_url;
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                toast.error(error.response.data.message);
+                return;
+            }
+
+            toast.error('Ошибка при создании заказа. Попробуйте еще раз.');
+            return;
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -60,18 +74,18 @@ const ContactForm = () => {
 
                 <div className={styles.field}>
                     <label>Адрес доставки</label>
-                    <textarea {...register("address")} placeholder='Адрес доставки' ></textarea>
+                    <textarea {...register("address", { required: "Введите адрес доставки" })} placeholder='Адрес доставки' ></textarea>
                 </div>
 
                 <div className={styles.field}>
                     <label>Тип оплаты</label>
                     <select { ...register("paymentType") } >
-                        <option type = "FIAT">Банковская карта / QR Code</option>
-                        <option type = "CRYPTO">Криптовалюта</option>
+                        <option value = "FIAT">Банковская карта / QR Code</option>
+                        <option value = "CRYPTO">Криптовалюта</option>
                     </select>
                 </div>
 
-                <button type='submit'>
+                <button type='submit' disabled={isLoading}>
                     <BadgeRussianRuble />
                     Перейти к оплате
                 </button>
@@ -80,4 +94,4 @@ const ContactForm = () => {
     );
 }
 
-export default ContactForm;
+export default React.memo(ContactForm);

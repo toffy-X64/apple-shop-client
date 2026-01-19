@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import CartSync from '@components/common/Cart/CartSync';
 import CartModal from '@components/common/Cart/CartModal';
+import toast from 'react-hot-toast';
 
 const CartContext = createContext(null);
 
@@ -36,6 +37,8 @@ export const CartProvider = ({ children }) => {
                 }
             ];
         })
+
+        toast.success('Товар добавлен в корзину');
     }, []);
 
     const removeFromCart = useCallback( (productId) => {

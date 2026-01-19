@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ProductCard.module.scss';
 
 import { useCart } from '@providers/CartProvider';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const ProductCard = React.memo( ({ product }) => {
     const { addToCart } = useCart();
@@ -11,7 +12,7 @@ const ProductCard = React.memo( ({ product }) => {
     };
 
     return (
-        <div className={styles.card}>
+        <NavLink className={styles.card} to={'/product/' + product.slug}>
             <div className={styles.imageWrapper}>
                 <img
                     src={product.image || '/placeholder.png'}
@@ -31,7 +32,7 @@ const ProductCard = React.memo( ({ product }) => {
                     {product.price.toLocaleString('ru-RU')} ₽
                 </div>
             </div>
-        </div>
+        </NavLink>
     );
 } );
 

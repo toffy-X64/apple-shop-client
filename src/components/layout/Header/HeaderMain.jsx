@@ -38,7 +38,8 @@ const HeaderMain = () => {
                     </div>
 
                     <div className={styles['action-sector']}>
-                        <HeaderSearchBar />
+                        {/* <HeaderSearchBar /> */}
+                        <a href="https://t.me/Tech_po">Написать менеджеру</a>
                         <MobileMenu isOpen={mobileMenuOpen} onToggle={() => setMobileMenuOpen(!mobileMenuOpen)} />
                     </div>
                 </div>

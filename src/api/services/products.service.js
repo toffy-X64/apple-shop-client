@@ -16,6 +16,10 @@ export const productService = {
             params.append('category', data.category);
         }
 
+        if (data.search) {
+            params.append('search', data.search);
+        }
+
         const url = '/products?' + params.toString();
 
         if (data.signal)
@@ -28,7 +32,14 @@ export const productService = {
             email: data.email,
             phone: data.phone,
             fullname: data.fullname,
-            items: data.items
+            items: data.items,
+            paymentType: data.paymentType
         })
+    },
+    getBySlug: async(slug, signal) => {
+        if (signal)
+            return await api.get('/products/' + slug, {signal: signal});
+        
+        return await api.get('/products/' + slug);
     }
 };

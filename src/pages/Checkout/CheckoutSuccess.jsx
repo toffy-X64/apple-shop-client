@@ -8,15 +8,15 @@ const CheckoutSuccess = () => {
                 <div className={styles.success}>
                     <div className={styles.icon}>✓</div>
 
-                    <h1>Замовлення успішно створено</h1>
+                    <h1>Заказ успешно создан</h1>
                     <p>
-                        Дякуємо за покупку! Наш менеджер звʼяжеться з вами найближчим часом
-                        для підтвердження деталей.
+                        Спасибо за покупку! Наш менеджер свяжется с вами в ближайшее время
+                        для подтверждения деталей.
                     </p>
 
                     <div className={styles.actions}>
                         <NavLink to="/" className={styles.primary}>
-                            Повернутись до каталогу
+                            Вернуться к каталогу
                         </NavLink>
                     </div>
                 </div>
