@@ -41,5 +41,17 @@ export const productService = {
             return await api.get('/products/' + slug, {signal: signal});
         
         return await api.get('/products/' + slug);
+    },
+    getCategoryBySlug: async(slug, signal) => {
+        if (signal)
+            return await api.get('/categories/' + slug, {signal: signal});
+        
+        return await api.get('/categories/' + slug);
+    },
+    getCategories: async(data) => {
+        if (data?.signal)
+            return await api.get('/categories', {signal: data.signal});
+
+        return await api.get('/categories');
     }
 };

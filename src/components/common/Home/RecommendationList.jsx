@@ -19,12 +19,13 @@ function useDebounce(callback, delay) {
     return debounceValue;
 }
 
-const RecommendationList = () => {
+const RecommendationList = ({ categorySelected = null }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [search, setSearch] = useState('');
     const [sort, setSort] = useState('newest');
+    const [category, setCategory] = useState(categorySelected);
 
     const debouncedSearch = useDebounce(search, 500).trim();
 
@@ -42,6 +43,7 @@ const RecommendationList = () => {
             const res = await productService.getAll({
                 page: pageRef.current, 
                 sort: sort,
+                category: category,
                 search: debouncedSearch
             });
 
@@ -90,6 +92,7 @@ const RecommendationList = () => {
                 const res = await productService.getAll({
                     page: 1,
                     sort: sort,
+                    category: category,
                     signal: controller.signal,
                     search: debouncedSearch
                 });
@@ -119,6 +122,7 @@ const RecommendationList = () => {
             try {
                 const res = await productService.getAll({
                     search: debouncedSearch,
+                    category: category,
                     signal: controller.signal
                 });
 

@@ -1,3 +1,57 @@
+.categoryListWrapper {
+  width: 100%;
+}
+
+.categoryList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background-color: #1d1d1d;
+  padding-bottom: 12px;
+  border-radius: 8px;
+
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.categoryCardImage {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.categoryCardName {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+  word-break: break-word;
+}
+
 .recommendationList {
   display: grid;
   gap: 20px;
