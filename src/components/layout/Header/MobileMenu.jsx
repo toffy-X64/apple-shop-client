@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import styles from './Header.module.scss';
+import { NavLink } from 'react-router-dom';
 
 const MobileMenu = ({ isOpen, onToggle }) => {
     return (
@@ -12,10 +13,8 @@ const MobileMenu = ({ isOpen, onToggle }) => {
             {isOpen && (
                 <div className={styles.mobileMenuOverlay} onClick={onToggle}>
                     <nav className={styles.mobileMenu} onClick={e => e.stopPropagation()}>
-                        <a href="/">Главная</a>
-                        <a href="/contacts">Контакты</a>
-                        <a href="/wholesale">Оптовая торговля</a>
-                        <a href="/delivery">Доставка</a>
+                        <NavLink to="/">Главная</NavLink>
+                        <NavLink to="/categoty/iphone">iPhones</NavLink>
                     </nav>
                 </div>
             )}
