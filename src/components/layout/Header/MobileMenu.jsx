@@ -8,7 +8,7 @@ const MobileMenu = ({ isOpen, onToggle }) => {
         <>
             <button className={styles.menuToggle} onClick={onToggle} aria-label="Toggle menu">
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            </button> 
 
             {isOpen && (
                 <div className={styles.mobileMenuOverlay} onClick={onToggle}>
