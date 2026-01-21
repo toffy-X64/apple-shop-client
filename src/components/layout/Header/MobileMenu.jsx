@@ -14,7 +14,7 @@ const MobileMenu = ({ isOpen, onToggle }) => {
                 <div className={styles.mobileMenuOverlay} onClick={onToggle}>
                     <nav className={styles.mobileMenu} onClick={e => e.stopPropagation()}>
                         <NavLink to="/">Главная</NavLink>
-                        <NavLink to="/categoty/iphone">iPhones</NavLink>
+                        <NavLink to="/category/iphone">iPhones</NavLink>
                     </nav>
                 </div>
             )}
