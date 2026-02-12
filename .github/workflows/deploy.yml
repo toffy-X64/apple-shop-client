@@ -1,0 +1,38 @@
+name: Deploy to VPS
+
+on:
+    push:
+        branches: [ main ]
+
+jobs: 
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Deploy via SSH
+            uses: appleboy/ssh-action@v1.0.0
+            with:
+              host: ${{ secrets.VPS_HOST }}
+              username: ${{ secrets.VPS_USER }}
+              password: ${{ secrets.VPS_PASSWORD }}
+              script: |
+                echo "🚀 Loading NVM environment..."
+
+                export NVM_DIR="/root/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+                cd apple-shop-client
+                git pull origin main
+
+                echo "VITE_API_URL=${{ secrets.API_URL }}" > .env
+
+                npm install
+                npm run build
+
+                echo "📦 Copy build to nginx folder..."
+                rm -rf /var/www/istor24/*
+                cp -r dist/* /var/www/istor24/
+
+                echo "♻ Restart nginx"
+                systemctl reload nginx
+
+                echo "✅ Deploy finished"
