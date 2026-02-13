@@ -5,5 +5,6 @@ const api = axios.create({
     timeout: 5000
 });
 
+
 const configuredApiInstance = api;
 export default configuredApiInstance;
