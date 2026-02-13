@@ -5,7 +5,8 @@ import { NavLink } from 'react-router-dom';
 const PLACEHOLDER_IMAGE = 'https://placehold.co/100x100';
 
 const CategoryCard = ({ category }) => {
-    const imageUrl = category.image || PLACEHOLDER_IMAGE;
+    // const imageUrl = category.image || PLACEHOLDER_IMAGE;
+    const imageUrl = import.meta.env.VITE_STORE_URL + "/images/categories/" + category.slug + ".png";
 
     return (
         <NavLink to={`/category/${category.slug}`} className={styles.categoryCard}>
