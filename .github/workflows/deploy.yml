@@ -24,8 +24,7 @@ jobs:
                 git pull origin main
 
                 echo "VITE_API_URL=${{ secrets.API_URL }}" > .env
-                echo "VITE_STORE_URL=${{ secrets.API_STORE_URL }}" > .env
-                
+                echo "VITE_STORE_URL=${{ secrets.API_STORE_URL }}" >> .env
 
                 npm install
                 npm run build
